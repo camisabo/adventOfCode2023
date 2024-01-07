@@ -111,17 +111,10 @@ public class example {
     
     public static ArrayList<Integer[]> nearNumbers(Integer[] symbol, ArrayList<Integer[]> numbers) {
         ArrayList<Integer[]> result = new ArrayList<Integer[]>();
-        System.out.println("\nSe han encontrado: ");
         for (int i = 0; i < numbers.size(); i++) {
             if (isInInterval(numbers.get(i)[0], symbol[0]-1, symbol[0]+1)) {
-//                System.out.println("El "+ numbers.get(i)[3] +" paso el primer nivel");
                 if (isInInterval(symbol[1]-1, numbers.get(i)[1], numbers.get(i)[2]) || isInInterval(symbol[1]+1, numbers.get(i)[1], numbers.get(i)[2]) || isInInterval(symbol[1], numbers.get(i)[1], numbers.get(i)[2])) {
                     result.add(numbers.get(i));
-                    System.out.println(numbers.get(i)[3]);
-                } else{
-//                    System.out.println("El "+ numbers.get(i)[3] +" no paso porque\n"
-//                            + "el intervalo " + (symbol[1]-1) + " y " + (symbol[1]+1) + " no se cruza con el intervalo "
-//                                    + numbers.get(i)[1] + " y " + numbers.get(i)[2] );
                 }
             }
         }
@@ -144,10 +137,8 @@ public class example {
             ArrayList<Integer[]> sumNumbers = nearNumbers(symbols.get(i), numbers);
             listOfCorrectNumbers = sumArrayList(listOfCorrectNumbers, sumNumbers);
         }
-        System.out.println("\nLa lista final es: ");
         for (int i = 0; i < listOfCorrectNumbers.size(); i++) {
             result += listOfCorrectNumbers.get(i)[3];
-            System.out.println(listOfCorrectNumbers.get(i)[3]);
         }
         return result;
     }

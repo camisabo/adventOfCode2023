@@ -23,12 +23,14 @@ public class puzzle {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-         ArrayList<String> input = txtReader("./txt/Solucion1P3.txt");
+        ArrayList<String> input = txtReader("./txt/Solucion1P3.txt");
         System.out.println(SubArrayList(input));
         System.out.println(Arrays.toString(SubArrayList(input).get(0)));
         System.out.println(Arrays.toString(symbolPositionsArrayList(input).get(0)));
         System.out.println(Arrays.toString(numberPositionsArrayList(input).get(1)));
         System.out.println("el resultado es: " + operation(input));
     }
+    
+    
     
 }
