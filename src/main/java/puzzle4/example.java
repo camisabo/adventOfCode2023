@@ -46,14 +46,14 @@ public class example {
         for(String number: elfNumbers){
             for(String posibleWinNumber: winningNumbers){
                 pointCouter = (number.equals(posibleWinNumber))? (pointCouter == 0)? 1 : pointCouter*2: pointCouter;
-                if (number.equals(posibleWinNumber)) {
-                    System.out.println("existe una coincidencia entre:" 
-                            + posibleWinNumber+ " y " + number + "\nse añaden " 
-                            + pointCouter + " puntos\n");
-                } else {
+//                if (number.equals(posibleWinNumber)) {
+//                    System.out.println("existe una coincidencia entre:" 
+//                            + posibleWinNumber+ " y " + number + "\nse añaden " 
+//                            + pointCouter + " puntos\n");
+//                } else {
 //                    System.out.println("No existe coincidencia entre:" 
 //                            + posibleWinNumber+ " y " + number + "\n\n");
-                }
+//                }
             }     
         }
         return pointCouter;

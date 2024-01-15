@@ -5,7 +5,9 @@
  */
 package puzzle4;
 
+import static java.lang.Integer.min;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import static puzzle1.example.txtReader;
@@ -24,7 +26,7 @@ public class part2 {
      */
     public static void main(String[] args) {
         Pattern pattern = Pattern.compile("Card\\s+(?<index>\\d+):\\s+(?<winning>(\\d+\\s*)*?)\\|\\s+(?<numbers>\\d+(\\s*\\d+)*)");
-        ArrayList<String> input = txtReader("./txt/Ejemplo1P4.txt");
+        ArrayList<String> input = txtReader("./txt/Solucion1P4.txt");
         
         //System.out.println(input);
         Integer index = 1;
@@ -37,10 +39,17 @@ public class part2 {
         }
         //System.out.println(pruveLine.group("numbers"));
         //System.out.println(points(pruveLine));
-        System.out.println(poitCounter(input, pattern));    
+        //System.out.println(poitCounter(input, pattern));    
+        System.out.println(Arrays.toString(cardsCounter(input, pattern)));
+        Integer total = 0; 
+        for (Integer num: cardsCounter(input, pattern)) {
+            total+=num;
+        }
+        System.out.println(total);
     }
     
     public static Integer recurcivePointCounter (ArrayList<String> input, Pattern pattern, int locationReference){
+        //System.out.println("location: " + (locationReference+1));
         Integer result = 0;
         String line = "";
         if (locationReference<input.size()) {
@@ -52,7 +61,7 @@ public class part2 {
         if (LineExpression.find()) {
             result = points(LineExpression);
             if (result != 0) {
-                for (int i = 1; i < result; i++) {
+                for (int i = 1; i < min(result,input.size()-1); i++) {
                     result += recurcivePointCounter(input, pattern, i+locationReference);
                 }
             }
@@ -74,5 +83,29 @@ public class part2 {
             }
         }
         return pointCouter;
-    } 
+    }
+    
+    public static double log2(int x) {
+        return (Math.log(x) / Math.log(2))+1;
+    }
+    
+    public static Integer[] cardsCounter (ArrayList<String> input, Pattern pattern) {
+        Integer[] numCards = new Integer[input.size()];
+        String line = "";
+        for (int i = 0; i < input.size(); i++) {
+            //System.out.println(i);
+            numCards[i]= (numCards[i]==null)?1:numCards[i]+1;
+            line = input.get(i);
+            Matcher LineExpression = separator(line, pattern);
+            if (initiatorMatcher(LineExpression)) {
+                double newCards = log2(points(LineExpression));
+                for (int k = 0; k < numCards[i]; k++) {
+                    for (int j = 1; j <= newCards; j++) {
+                        numCards[i+j]=(numCards[i+j]==null)?1:numCards[i+j]+1;
+                    }
+                }
+            }
+        }
+        return numCards;
+    }
 }
