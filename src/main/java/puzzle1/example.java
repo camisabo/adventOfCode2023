@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 
 public class example {
@@ -55,7 +56,34 @@ public class example {
         return lineas;
     }
     
-    
+    /**
+     * Metodo que lee las lineas de un txt
+     * 
+     * @param path String que indica la ruta al txt
+     * @param wholeText Booleano que indica si el txt, se devuelve en una sola cadena o no
+     * @return Un arraylist de strings con cada linea del txt
+     */
+    public static ArrayList<String> txtReader (String path, boolean wholeText){
+        ArrayList<String> lineas = new ArrayList<>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(path));
+            String linea;
+            if (!wholeText) {
+                while ((linea = reader.readLine()) != null) {
+                    lineas.add(linea);
+                }
+            }
+            else{
+                linea = reader.lines().collect(Collectors.joining("\n"));
+                lineas.add(linea);
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return lineas;
+    }
     
     public static char[] split (String code){
         return code.toCharArray();
