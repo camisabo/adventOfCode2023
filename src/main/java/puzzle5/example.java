@@ -47,12 +47,19 @@ public class example {
         
         completeEspesifications(pruveLine, seeds);
         
+        long min = seeds.get(0).getSeedLocation();
+        
         for (int i = 0; i < seeds.size(); i++) {
+            long seedLocation = seeds.get(i).getSeedLocation();
+            if (min>seedLocation) {
+                min = seedLocation;
+            }
             printSeed(i, seeds);
         }
-        
+        System.out.println("\n---------\n"+min);
     }
-    private static void printSeed (int reference, ArrayList<SeedEspesification> seeds){
+    public static void printSeed (int reference, ArrayList<SeedEspesification> seeds){
+        System.out.println("----------");
         System.out.println("Semilla con referencia: " + reference);
         System.out.println("----------");
         System.out.println(seeds.get(reference).getSeedName());
@@ -70,7 +77,7 @@ public class example {
         String[] seedStrings = seeds.split("\\s+");
         
         for (String seedString : seedStrings) {
-            Integer num = Integer.parseInt(seedString);
+            Long num = Long.parseLong(seedString);
             SeedEspesification seed = new SeedEspesification(num);
             seedArrayList.add(seed);
         }
@@ -78,21 +85,21 @@ public class example {
         return seedArrayList;
     }
     
-    public static int [][] espesificationSeparator (String espesification){
+    public static long [][] espesificationSeparator (String espesification){
         String[] lines = espesification.split("\\n");
-        int[][] espesificationMatix = new int[lines.length][];
+        long[][] espesificationMatix = new long[lines.length][];
         int reference = 0;
         for (String line : lines) {
             String[] stringsNumbers = line.split("\\s+");
-            Integer[] Numbers = Arrays.stream(stringsNumbers)
-                           .map(Integer::parseInt)
-                           .toArray(Integer[]::new);
+            Long[] numbers = Arrays.stream(stringsNumbers)
+                   .map(Long::parseLong)
+                   .toArray(Long[]::new);
 
-            int[] numbersInt = Arrays.stream(Numbers)
-                           .mapToInt(Integer::intValue)
-                           .toArray();
+            long[] numbersLong = Arrays.stream(numbers)
+                   .mapToLong(Long::longValue)
+                   .toArray();
 
-            espesificationMatix[reference] = numbersInt;
+            espesificationMatix[reference] = numbersLong;
             reference++;
         }
 
@@ -101,15 +108,15 @@ public class example {
 
     
     public static void addEspesification(SeedEspesification seed, String espesification, String nameDestination) {
-        int[][] espesificationMatrix = espesificationSeparator(espesification);
+        long[][] espesificationMatrix = espesificationSeparator(espesification);
         boolean itsAlreadyChanged = false;
-        for (int[] line : espesificationMatrix){
-            int destination = line[0];
-            int source = line[1];
-            int range = line[2];
+        for (long[] line : espesificationMatrix){
+            long destination = line[0];
+            long source = line[1];
+            long range = line[2];
             String referenceString = nameDestination.substring(0, 2);
             if(seed.itsInRange(source, range, referenceString)){
-                int destinationValue;
+                long destinationValue;
                 switch(nameDestination){
                     case "fertilizer":
                         destinationValue = destination + seed.getSeedSoil() - source;

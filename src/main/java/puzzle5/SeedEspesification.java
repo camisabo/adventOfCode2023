@@ -10,80 +10,80 @@ package puzzle5;
  * @author Omar Nicolas Guerrero
  */
 public class SeedEspesification {
-    private Integer seedName;
-    private Integer seedSoil;
-    private Integer seedFertilizer;
-    private Integer seedWater;
-    private Integer seedLight;
-    private Integer seedTemperature;
-    private Integer seedHumidity;
-    private Integer seedLocation;
+    private long seedName;
+    private long seedSoil;
+    private long seedFertilizer;
+    private long seedWater;
+    private long seedLight;
+    private long seedTemperature;
+    private long seedHumidity;
+    private long seedLocation;
 
-    public SeedEspesification(Integer seedName) {
+    public SeedEspesification(long seedName) {
         this.seedName = seedName;
     }
 
-    public Integer getSeedName() {
+    public long getSeedName() {
         return seedName;
     }
 
-    public Integer getSeedSoil() {
+    public long getSeedSoil() {
         return seedSoil;
     }
 
-    public Integer getSeedFertilizer() {
+    public long getSeedFertilizer() {
         return seedFertilizer;
     }
 
-    public Integer getSeedWater() {
+    public long getSeedWater() {
         return seedWater;
     }
 
-    public Integer getSeedLight() {
+    public long getSeedLight() {
         return seedLight;
     }
 
-    public Integer getSeedTemperature() {
+    public long getSeedTemperature() {
         return seedTemperature;
     }
 
-    public Integer getSeedHumidity() {
+    public long getSeedHumidity() {
         return seedHumidity;
     }
 
-    public Integer getSeedLocation() {
+    public long getSeedLocation() {
         return seedLocation;
     }
 
-    public void setSeedName(Integer seedName) {
+    public void setSeedName(long seedName) {
         this.seedName = seedName;
     }
 
-    public void setSeedSoil(Integer seedSoil) {
+    public void setSeedSoil(long seedSoil) {
         this.seedSoil = seedSoil;
     }
 
-    public void setSeedFertilizer(Integer seedFertilizer) {
+    public void setSeedFertilizer(long seedFertilizer) {
         this.seedFertilizer = seedFertilizer;
     }
 
-    public void setSeedWater(Integer seedWater) {
+    public void setSeedWater(long seedWater) {
         this.seedWater = seedWater;
     }
 
-    public void setSeedLight(Integer seedLight) {
+    public void setSeedLight(long seedLight) {
         this.seedLight = seedLight;
     }
 
-    public void setSeedTemperature(Integer seedTemperature) {
+    public void setSeedTemperature(long seedTemperature) {
         this.seedTemperature = seedTemperature;
     }
 
-    public void setSeedHumidity(Integer seedHumidity) {
+    public void setSeedHumidity(long seedHumidity) {
         this.seedHumidity = seedHumidity;
     }
 
-    public void setSeedLocation(Integer seedLocation) {
+    public void setSeedLocation(long seedLocation) {
         this.seedLocation = seedLocation;
     }
     
@@ -94,9 +94,9 @@ public class SeedEspesification {
         int lastValue = source+rangeValue-1;
         return (firstValue <= seedName && seedName<=lastValue);
     }
-    public boolean itsInRange (int source, int rangeValue, String lettersReference){
-        int firstValue = source;
-        int lastValue = source+rangeValue;
+    public boolean itsInRange (long source, long rangeValue, String lettersReference){
+        long firstValue = source;
+        long lastValue = source+rangeValue;
         switch (lettersReference){
                 
             case "fe": //fertilizer 
@@ -118,7 +118,7 @@ public class SeedEspesification {
                 return (firstValue <= seedHumidity && seedHumidity <=lastValue);
                 
             default:
-               return (firstValue <= seedName && seedName <=lastValue); 
+               return (firstValue <= seedName && seedName<=lastValue); 
         }
     }
 }
