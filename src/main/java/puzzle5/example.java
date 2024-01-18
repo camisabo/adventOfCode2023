@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import static jdk.nashorn.internal.objects.NativeArray.map;
 import static puzzle1.example.txtReader;
 import static puzzle4.example.separator;
 
@@ -79,7 +78,7 @@ public class example {
         for (String seedString : seedStrings) {
             Long num = Long.parseLong(seedString);
             SeedEspesification seed = new SeedEspesification(num);
-            seedArrayList.add(seed);
+            seedArrayList.add(seed); 
         }
         
         return seedArrayList;
