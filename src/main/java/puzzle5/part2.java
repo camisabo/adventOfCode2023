@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import static puzzle1.example.txtReader;
 import static puzzle4.example.separator;
 import static puzzle5.example.completeEspesifications;
+import static puzzle5.example.espesificationSeparator;
 import static puzzle5.example.pattern;
 import static puzzle5.example.printSeed;
 import static puzzle5.example.seedEspesificationsInitialitation;
@@ -27,6 +28,8 @@ public class part2 {
         String input = txtReader("./txt/Solucion1p5.txt",true).get(0);
         Matcher pruveLine = separator(input, pattern);
         if (pruveLine.find()) {        }
+        
+        ArrayList<Range> seedRanges = seedRanges(pruveLine.group("seeds"));
         
 //        String seedsString = seedsString(pruveLine.group("seeds"), 0);
 //        System.out.println("salio 1");
@@ -62,6 +65,36 @@ public class part2 {
 //        }
 //
 //        return seeds.toString();
-//    }   
+//    }
+    
+    
+    
+    public static ArrayList<Range> seedRanges (String seeds) {
+        ArrayList<Range> Ranges = new ArrayList<Range>();
+        String[] seedStrings = seeds.split("\\s+");
+        
+        for (int i = 0; i < seedStrings.length; i+=2) {
+            Long firstNumber = Long.parseLong(seedStrings[i]);
+            Long lastNumber = firstNumber + Long.parseLong(seedStrings[i])-1;
+            Range newRange = new Range(firstNumber, lastNumber);
+            Ranges.add(newRange); 
+        }
+        return Ranges;
+    }
+    
+    public static ArrayList<SeedEspesification> createNewSeeds(ArrayList<Range> ranges) {
+        ArrayList<SeedEspesification> seeds = new ArrayList<>();
+        for (Range range : ranges) {
+            SeedEspesification newSeedEspesification = new SeedEspesification(range.getFirstElement());
+            seeds.add(newSeedEspesification);
+        }
+        return seeds;
+    }
+    
+    public static ArrayList<Range> updateRanges (ArrayList<Range> rangeArrayList, String espesification) {
+        ArrayList<Range> updateRanges = new ArrayList<>();
+        long[][]espesificationMatrix = espesificationSeparator(espesification);
+        return updateRanges;
+    }
 
 }
